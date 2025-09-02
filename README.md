@@ -1,10 +1,13 @@
-### React Native Liquid Glass 🔍
+<div align="center">
+  <h1>React Native Liquid Glass 🔍</h1>
 
-[![mit licence][license-badge]][license] [![npm downloads][npm-downloads-badge]][npm-downloads] [![PRs Welcome][prs-welcome-badge]][prs-welcome]
+[![mit licence](https://img.shields.io/dub/l/vibe-d.svg?style=for-the-badge)](https://github.com/callstack/liquid-glass/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/@callstack/liquid-glass?style=for-the-badge)](https://www.npmjs.org/package/@callstack/liquid-glass)
 
 `@callstack/liquid-glass` brings iOS 26 liquid glass effect to React Native apps on iOS.
 
 <img src="./assets/demo-screenshot.png" width="500" />
+</div>
 
 ## Features
 
@@ -75,9 +78,7 @@ function MyComponent() {
 Like the project? ⚛️ [Join the team](https://callstack.com/careers/?utm_campaign=Senior_RN&utm_source=github&utm_medium=readme) who does amazing stuff for clients and drives React Native Open Source! 🔥
 
 [callstack-readme-with-love]: https://callstack.com/?utm_source=github.com&utm_medium=referral&utm_campaign=liquid-glass&utm_term=readme-with-love
-[license-badge]: https://img.shields.io/npm/l/@callstack/liquid-glass?style=for-the-badge
-[license]: https://github.com/callstack/liquid-glass/blob/main/LICENSE
-[npm-downloads-badge]: https://img.shields.io/npm/dm/@callstack/liquid-glass?style=for-the-badge
-[npm-downloads]: https://www.npmjs.com/package/@callstack/liquid-glass
+[version-badge]: https://img.shields.io/npm/v/@callstack/liquid-glass?style=for-the-badge
+[version]: https://github.com/callstack/liquid-glass/blob/main/LICENSE
 [prs-welcome-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge
 [prs-welcome]: ./CONTRIBUTING.md
