@@ -157,7 +157,8 @@
     },
     "ios": {
       "componentProvider": {
-        "LiquidGlassView": "LiquidGlassView"
+        "LiquidGlassView": "LiquidGlassView",
+        "LiquidGlassContainerView": "LiquidGlassContainerView"
       }
     }
   },

@@ -4,8 +4,12 @@
 #import <react/renderer/components/LiquidGlassViewSpec/EventEmitters.h>
 #import <react/renderer/components/LiquidGlassViewSpec/Props.h>
 #import <react/renderer/components/LiquidGlassViewSpec/RCTComponentViewHelpers.h>
+#import "RCTImagePrimitivesConversions.h"
 
 #import "RCTFabricComponentsPlugins.h"
+
+#import "LiquidGlass-Swift.h"
+#import "RCTConversions.h"
 
 using namespace facebook::react;
 
@@ -14,12 +18,12 @@ using namespace facebook::react;
 @end
 
 @implementation LiquidGlassView {
-    UIView * _view;
+  LiquidGlassViewImpl * _view;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider
 {
-    return concreteComponentDescriptorProvider<LiquidGlassViewComponentDescriptor>();
+  return concreteComponentDescriptorProvider<LiquidGlassViewComponentDescriptor>();
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -27,45 +31,86 @@ using namespace facebook::react;
   if (self = [super initWithFrame:frame]) {
     static const auto defaultProps = std::make_shared<const LiquidGlassViewProps>();
     _props = defaultProps;
-
-    _view = [[UIView alloc] init];
-
+    
+    _view = [[LiquidGlassViewImpl alloc] init];
+    
     self.contentView = _view;
   }
-
+  
   return self;
 }
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  _view.layer.cornerRadius = self.layer.cornerRadius;
+  _view.layer.cornerCurve = self.layer.cornerCurve;
+}
+
 
 - (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps
 {
-    const auto &oldViewProps = *std::static_pointer_cast<LiquidGlassViewProps const>(_props);
-    const auto &newViewProps = *std::static_pointer_cast<LiquidGlassViewProps const>(props);
-
-    if (oldViewProps.color != newViewProps.color) {
-        NSString * colorToConvert = [[NSString alloc] initWithUTF8String: newViewProps.color.c_str()];
-        [_view setBackgroundColor:[self hexStringToColor:colorToConvert]];
+  const auto &oldViewProps = *std::static_pointer_cast<LiquidGlassViewProps const>(_props);
+  const auto &newViewProps = *std::static_pointer_cast<LiquidGlassViewProps const>(props);
+  
+  
+  if (oldViewProps.tintColor != newViewProps.tintColor) {
+    _view.effectTintColor = RCTUIColorFromSharedColor(newViewProps.tintColor);
+  }
+  
+  if (oldViewProps.effect != newViewProps.effect) {
+    switch (newViewProps.effect) {
+      case LiquidGlassViewEffect::Regular:
+        [_view setStyle:UIGlassEffectStyleRegular];
+        break;
+        
+      case LiquidGlassViewEffect::Clear:
+        [_view setStyle:UIGlassEffectStyleClear];
+        break;
     }
-
-    [super updateProps:props oldProps:oldProps];
+  }
+  
+  if (oldViewProps.interactive != newViewProps.interactive) {
+    _view.interactive = newViewProps.interactive;
+  }
+  
+  if (oldViewProps.colorScheme != newViewProps.colorScheme) {
+    switch (newViewProps.colorScheme) {
+      case LiquidGlassViewColorScheme::System:
+        _view.overrideUserInterfaceStyle = UIUserInterfaceStyleUnspecified;
+        break;
+        
+      case LiquidGlassViewColorScheme::Dark:
+        _view.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
+        break;
+        
+      case LiquidGlassViewColorScheme::Light:
+        _view.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+        break;
+    }
+  }
+  
+  if (oldViewProps.borderRadii != newViewProps.borderRadii) {
+    _view.layer.cornerRadius = self.layer.cornerRadius;
+    _view.layer.cornerCurve = self.layer.cornerCurve;
+  }
+  
+  
+  [super updateProps:props oldProps:oldProps];
 }
 
-Class<RCTComponentViewProtocol> LiquidGlassViewCls(void)
-{
-    return LiquidGlassView.class;
+- (void)finalizeUpdates:(RNComponentViewUpdateMask)updateMask {
+  [super finalizeUpdates:updateMask];
+  
+  if (updateMask == RNComponentViewUpdateMaskProps) {
+    [_view setupView];
+  }
 }
 
-- hexStringToColor:(NSString *)stringToConvert
-{
-    NSString *noHashString = [stringToConvert stringByReplacingOccurrencesOfString:@"#" withString:@""];
-    NSScanner *stringScanner = [NSScanner scannerWithString:noHashString];
+- (void)mountChildComponentView:(UIView<RCTComponentViewProtocol> *)childComponentView index:(NSInteger)index {
+  [_view.contentView insertSubview:childComponentView atIndex:index];
+}
 
-    unsigned hex;
-    if (![stringScanner scanHexInt:&hex]) return nil;
-    int r = (hex >> 16) & 0xFF;
-    int g = (hex >> 8) & 0xFF;
-    int b = (hex) & 0xFF;
-
-    return [UIColor colorWithRed:r / 255.0f green:g / 255.0f blue:b / 255.0f alpha:1.0f];
+- (void)unmountChildComponentView:(UIView<RCTComponentViewProtocol> *)childComponentView index:(NSInteger)index {
+  [childComponentView removeFromSuperview];
 }
 
 @end

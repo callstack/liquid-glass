@@ -10,6 +10,7 @@
     "build:ios": "react-native build-ios --mode Debug"
   },
   "dependencies": {
+    "@react-native-community/slider": "^5.0.1",
     "@react-native/new-app-screen": "0.81.0",
     "react": "19.1.0",
     "react-native": "0.81.0",
