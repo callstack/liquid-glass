@@ -1,6 +1,8 @@
 import UIKit
 
 
+#if compiler(>=6.2)
+
 @available(iOS 26.0, *)
 @objc public class LiquidGlassViewImpl: UIVisualEffectView {
   @objc public var effectTintColor: UIColor?
@@ -20,3 +22,10 @@ import UIKit
     self.effect = glassEffect
   }
 }
+
+#else
+
+@objc public class LiquidGlassViewImpl: UIView {}
+
+#endif
+

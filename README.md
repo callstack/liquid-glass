@@ -22,15 +22,25 @@ npm install @callstack/liquid-glass
 yarn add @callstack/liquid-glass
 ```
 
+> [!WARNING]
+> Make sure to compile your app with Xcode >= 26.
+
 ### Usage
 
 ```tsx
 import { LiquidGlassView } from '@callstack/liquid-glass';
 
+// Handle fallback for unsupported iOS versions
+const supportsLiquidGlass =
+  Platform.OS === 'ios' && Number(Platform.Version.split('.').at(0)) >= 26;
+
 function MyComponent() {
   return (
     <LiquidGlassView
-      style={{ width: 200, height: 100, borderRadius: 20 }}
+      style={[
+        { width: 200, height: 100, borderRadius: 20 },
+        !supportsLiquidGlass && { backgroundColor: 'rgba(255,255,255,0.5)' },
+      ]}
       interactive
       effect="clear"
     >
@@ -40,6 +50,9 @@ function MyComponent() {
 }
 ```
 
+> [!NOTE]
+> On unsupported iOS version (below iOS 26), it will render a normal `View` without any effects.
+
 ### LiquidGlassView - Props
 
 | Prop          | Type                            | Default     | Description                                                                                                                         |
@@ -48,6 +61,10 @@ function MyComponent() {
 | `effect`      | `'clear' \| 'regular'`          | `'regular'` | Visual effect mode:<br/>• `clear` - More transparent glass effect<br/>• `regular` - Standard glass blur effect                      |
 | `tintColor`   | `ColorValue`                    | `undefined` | Overlay color tint applied to the glass effect. Accepts any React Native color format (hex, rgba, named colors)                     |
 | `colorScheme` | `'light' \| 'dark' \| 'system'` | `'system'`  | Color scheme adaptation:<br/>• `light` - Light appearance<br/>• `dark` - Dark appearance<br/>• `system` - Follows system appearance |
+
+## Known issues
+
+- `interactive` prop is not changed dynamically, it is only set on mount.
 
 ## Made with ❤️ at Callstack
 

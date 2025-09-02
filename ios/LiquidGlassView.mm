@@ -39,18 +39,18 @@ using namespace facebook::react;
   
   return self;
 }
+
+#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 260000 /* __IPHONE_26_0 */
 - (void)layoutSubviews {
   [super layoutSubviews];
   _view.layer.cornerRadius = self.layer.cornerRadius;
   _view.layer.cornerCurve = self.layer.cornerCurve;
 }
 
-
 - (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps
 {
   const auto &oldViewProps = *std::static_pointer_cast<LiquidGlassViewProps const>(_props);
   const auto &newViewProps = *std::static_pointer_cast<LiquidGlassViewProps const>(props);
-  
   
   if (oldViewProps.tintColor != newViewProps.tintColor) {
     _view.effectTintColor = RCTUIColorFromSharedColor(newViewProps.tintColor);
@@ -112,5 +112,7 @@ using namespace facebook::react;
 - (void)unmountChildComponentView:(UIView<RCTComponentViewProtocol> *)childComponentView index:(NSInteger)index {
   [childComponentView removeFromSuperview];
 }
+
+#endif
 
 @end

@@ -38,6 +38,8 @@ using namespace facebook::react;
   return self;
 }
 
+#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 260000 /* __IPHONE_26_0 */
+
 - (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps
 {
   const auto &oldViewProps = *std::static_pointer_cast<LiquidGlassContainerViewProps const>(_props);
@@ -46,8 +48,6 @@ using namespace facebook::react;
   if (oldViewProps.spacing != newViewProps.spacing) {
     [_view setSpacing:newViewProps.spacing];
   }
-  
-
 
   [super updateProps:props oldProps:oldProps];
 }
@@ -59,6 +59,7 @@ using namespace facebook::react;
 - (void)unmountChildComponentView:(UIView<RCTComponentViewProtocol> *)childComponentView index:(NSInteger)index {
   [childComponentView removeFromSuperview];
 }
+#endif
 
 @end
 

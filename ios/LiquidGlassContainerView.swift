@@ -1,5 +1,6 @@
 import UIKit
 
+#if compiler(>=6.2)
 
 @objc public class LiquidGlassConatinerViewImpl: UIVisualEffectView {
   public override func layoutSubviews() {
@@ -20,3 +21,8 @@ import UIKit
   }
 }
 
+#else
+
+@objc public class LiquidGlassConatinerViewImpl: UIView {}
+
+#endif
