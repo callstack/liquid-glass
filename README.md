@@ -76,7 +76,7 @@ Like the project? ⚛️ [Join the team](https://callstack.com/careers/?utm_camp
 
 [callstack-readme-with-love]: https://callstack.com/?utm_source=github.com&utm_medium=referral&utm_campaign=liquid-glass&utm_term=readme-with-love
 [license-badge]: https://img.shields.io/npm/l/@callstack/liquid-glass?style=for-the-badge
-[license]: https://github.com/callstackincubator/@callstack/liquid-glass/blob/main/LICENSE
+[license]: https://github.com/callstack/liquid-glass/blob/main/LICENSE
 [npm-downloads-badge]: https://img.shields.io/npm/dm/@callstack/liquid-glass?style=for-the-badge
 [npm-downloads]: https://www.npmjs.com/package/@callstack/liquid-glass
 [prs-welcome-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge
