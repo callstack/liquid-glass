@@ -5,7 +5,7 @@ import {
   type CodegenTypes,
 } from 'react-native';
 
-interface NativeProps extends ViewProps {
+export interface NativeProps extends ViewProps {
   interactive?: boolean;
   effect?: CodegenTypes.WithDefault<'clear' | 'regular', 'regular'>;
   tintColor?: ColorValue;
