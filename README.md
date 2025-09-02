@@ -1,10 +1,10 @@
-### React Native Liquid Glass 🧊
+### React Native Liquid Glass 🔍
 
 [![mit licence][license-badge]][license] [![npm downloads][npm-downloads-badge]][npm-downloads] [![PRs Welcome][prs-welcome-badge]][prs-welcome]
 
 `@callstack/liquid-glass` brings iOS 26 liquid glass effect to React Native apps on iOS.
 
-<img src="https://github.com/user-attachments/assets/979b37a5-7ab8-4a0b-bbab-22034e8110ef" width="500" />
+<img src="./assets/demo-screenshot.png" width="500" />
 
 ## Features
 
