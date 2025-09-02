@@ -1,8 +1,10 @@
 ### React Native Liquid Glass 🧊
 
-[![mit licence][license-badge]][license] [![npm downloads][npm-downloads-badge]][npm-downloads] [![Chat][chat-badge]][chat] [![PRs Welcome][prs-welcome-badge]][prs-welcome]
+[![mit licence][license-badge]][license] [![npm downloads][npm-downloads-badge]][npm-downloads] [![PRs Welcome][prs-welcome-badge]][prs-welcome]
 
 `@callstack/liquid-glass` brings iOS 26 liquid glass effect to React Native apps on iOS.
+
+<img src="https://github.com/user-attachments/assets/979b37a5-7ab8-4a0b-bbab-22034e8110ef" width="500" />
 
 ## Features
 
@@ -38,16 +40,14 @@ function MyComponent() {
 }
 ```
 
-### Props
+### LiquidGlassView - Props
 
-The `LiquidGlassView` component accepts all standard View props plus the following:
-
-| Prop          | Type                                    | Default     | Description                                                                                                     |
-| ------------- | --------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------- |
-| `interactive` | `boolean`                               | `false`     | Enables touch interaction effects when pressing the view                                                        |
-| `effect`      | `'clear' \| 'regular'`                  | `'regular'` | Visual effect mode:<br/>• `clear` - More transparent glass effect<br/>• `regular` - Standard glass blur effect  |
-| `tintColor`   | `ColorValue`                            | `undefined` | Overlay color tint applied to the glass effect. Accepts any React Native color format (hex, rgba, named colors) |
-| `colorScheme` | `'light' \| 'dark' \| 'system'`         | `'system'`  | Color scheme adaptation:<br/>• `light` - Light appearance<br/>• `dark` - Dark appearance<br/>• `system` - Follows system appearance |
+| Prop          | Type                            | Default     | Description                                                                                                                         |
+| ------------- | ------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `interactive` | `boolean`                       | `false`     | Enables touch interaction effects when pressing the view                                                                            |
+| `effect`      | `'clear' \| 'regular'`          | `'regular'` | Visual effect mode:<br/>• `clear` - More transparent glass effect<br/>• `regular` - Standard glass blur effect                      |
+| `tintColor`   | `ColorValue`                    | `undefined` | Overlay color tint applied to the glass effect. Accepts any React Native color format (hex, rgba, named colors)                     |
+| `colorScheme` | `'light' \| 'dark' \| 'system'` | `'system'`  | Color scheme adaptation:<br/>• `light` - Light appearance<br/>• `dark` - Dark appearance<br/>• `system` - Follows system appearance |
 
 ## Made with ❤️ at Callstack
 
