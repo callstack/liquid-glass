@@ -159,6 +159,9 @@
       "componentProvider": {
         "LiquidGlassView": "LiquidGlassView",
         "LiquidGlassContainerView": "LiquidGlassContainerView"
+      },
+      "modulesProvider": {
+        "NativeLiquidGlassModule": "LiquidGlassModule"
       }
     }
   },
