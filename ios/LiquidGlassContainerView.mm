@@ -7,7 +7,11 @@
 
 #import "RCTFabricComponentsPlugins.h"
 
+#if __has_include("LiquidGlass/LiquidGlass-Swift.h")
+#import "LiquidGlass/LiquidGlass-Swift.h"
+#else
 #import "LiquidGlass-Swift.h"
+#endif
 
 using namespace facebook::react;
 

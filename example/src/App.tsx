@@ -9,7 +9,10 @@ import {
   View,
   Pressable,
 } from 'react-native';
-import { LiquidGlassView } from '@callstack/liquid-glass';
+import {
+  LiquidGlassView,
+  isLiquidGlassSupported,
+} from '@callstack/liquid-glass';
 import { useEffect, useState } from 'react';
 
 const AnimatedLiquidGlassView =
@@ -62,7 +65,10 @@ function WeatherWidget() {
   return (
     <View style={{ flexDirection: 'row', gap: 10, marginBottom: 20 }}>
       <LiquidGlassView
-        style={styles.weather}
+        style={[
+          styles.weather,
+          !isLiquidGlassSupported && { backgroundColor: 'rgba(255,165,0,0.3)' },
+        ]}
         interactive={true}
         effect={'clear'}
         tintColor={'orange'}

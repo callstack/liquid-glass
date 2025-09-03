@@ -31,18 +31,17 @@ yarn add @callstack/liquid-glass
 ### Usage
 
 ```tsx
-import { LiquidGlassView } from '@callstack/liquid-glass';
-
-// Handle fallback for unsupported iOS versions
-const supportsLiquidGlass =
-  Platform.OS === 'ios' && Number(Platform.Version.split('.').at(0)) >= 26;
+import {
+  LiquidGlassView,
+  isLiquidGlassSupported,
+} from '@callstack/liquid-glass';
 
 function MyComponent() {
   return (
     <LiquidGlassView
       style={[
         { width: 200, height: 100, borderRadius: 20 },
-        !supportsLiquidGlass && { backgroundColor: 'rgba(255,255,255,0.5)' },
+        !isLiquidGlassSupported && { backgroundColor: 'rgba(255,255,255,0.5)' },
       ]}
       interactive
       effect="clear"
@@ -55,6 +54,22 @@ function MyComponent() {
 
 > [!NOTE]
 > On unsupported iOS version (below iOS 26), it will render a normal `View` without any effects.
+
+### API
+
+#### `isLiquidGlassSupported`
+
+A boolean constant that indicates whether the current device supports the liquid glass effect.
+
+```tsx
+import { isLiquidGlassSupported } from '@callstack/liquid-glass';
+
+if (isLiquidGlassSupported) {
+  // Device supports liquid glass effect
+} else {
+  // Provide fallback UI
+}
+```
 
 ### LiquidGlassView - Props
 
