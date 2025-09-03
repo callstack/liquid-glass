@@ -33,6 +33,7 @@ yarn add @callstack/liquid-glass
 ```tsx
 import {
   LiquidGlassView,
+  LiquidGlassContainerView,
   isLiquidGlassSupported,
 } from '@callstack/liquid-glass';
 
@@ -48,6 +49,16 @@ function MyComponent() {
     >
       <Text>Hello World</Text>
     </LiquidGlassView>
+  );
+}
+
+// For combining multiple glass elements
+function MergingGlassElements() {
+  return (
+    <LiquidGlassContainerView spacing={20}>
+      <LiquidGlassView style={{ width: 100, height: 100, borderRadius: 50 }} />
+      <LiquidGlassView style={{ width: 100, height: 100, borderRadius: 50 }} />
+    </LiquidGlassContainerView>
   );
 }
 ```
@@ -79,6 +90,12 @@ if (isLiquidGlassSupported) {
 | `effect`      | `'clear' \| 'regular'`          | `'regular'` | Visual effect mode:<br/>• `clear` - More transparent glass effect<br/>• `regular` - Standard glass blur effect                      |
 | `tintColor`   | `ColorValue`                    | `undefined` | Overlay color tint applied to the glass effect. Accepts any React Native color format (hex, rgba, named colors)                     |
 | `colorScheme` | `'light' \| 'dark' \| 'system'` | `'system'`  | Color scheme adaptation:<br/>• `light` - Light appearance<br/>• `dark` - Dark appearance<br/>• `system` - Follows system appearance |
+
+### LiquidGlassContainerView - Props
+
+| Prop      | Type     | Default | Description                                                                                                 |
+| --------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------- |
+| `spacing` | `number` | `0`     | The distance between child elements at which they begin to merge their glass effects into a combined effect |
 
 ## Known issues
 

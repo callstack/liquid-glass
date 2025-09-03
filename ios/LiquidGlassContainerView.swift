@@ -2,22 +2,24 @@ import UIKit
 
 #if compiler(>=6.2)
 
+@available(iOS 26.0, *)
 @objc public class LiquidGlassConatinerViewImpl: UIVisualEffectView {
-  public override func layoutSubviews() {
-    if #available(iOS 26.0, *) {
+  @objc public var spacing: CGFloat = 0 {
+    didSet {
       setupView()
     }
   }
   
-  @available(iOS 26.0, *)
-  private func setupView() {
-    self.effect = UIGlassContainerEffect()
+  
+  public override func layoutSubviews() {
+    setupView()
   }
   
-  @objc public func setSpacing(_ spacing: CGFloat) {
-    if #available(iOS 26.0, *) {
-      (self.effect as? UIGlassContainerEffect)?.spacing = spacing
-    }
+  
+  private func setupView() {
+    let effect = UIGlassContainerEffect()
+    effect.spacing = spacing
+    self.effect = effect
   }
 }
 

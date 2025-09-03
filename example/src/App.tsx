@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {
   LiquidGlassView,
+  LiquidGlassContainerView,
   isLiquidGlassSupported,
 } from '@callstack/liquid-glass';
 import { useEffect, useState } from 'react';
@@ -99,7 +100,7 @@ function MergingCircles() {
 
   useEffect(() => {
     Animated.timing(translateX, {
-      toValue: merged ? -120 : 30,
+      toValue: merged ? -50 : 30,
       duration: 2000,
       useNativeDriver: false,
     }).start();
@@ -110,10 +111,21 @@ function MergingCircles() {
       style={styles.circles}
       onPress={() => setMerged((prev) => !prev)}
     >
-      <AnimatedLiquidGlassView style={styles.circle} />
-      <AnimatedLiquidGlassView
-        style={[styles.circle, { transform: [{ translateX }] }]}
-      />
+      <LiquidGlassContainerView
+        spacing={20}
+        style={{
+          width: '100%',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <AnimatedLiquidGlassView style={styles.circle} effect="clear" />
+        <AnimatedLiquidGlassView
+          effect="clear"
+          style={[styles.circle, { transform: [{ translateX }] }]}
+        />
+      </LiquidGlassContainerView>
     </Pressable>
   );
 }
@@ -182,7 +194,7 @@ const styles = StyleSheet.create({
   circle: {
     height: 120,
     width: 120,
-    borderRadius: 20,
+    borderRadius: 100,
     color: 'white',
   },
   circles: {
