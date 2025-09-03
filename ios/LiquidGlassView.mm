@@ -109,6 +109,15 @@ using namespace facebook::react;
   }
 }
 
+- (void)updateLayoutMetrics:(const LayoutMetrics &)layoutMetrics
+           oldLayoutMetrics:(const LayoutMetrics &)oldLayoutMetrics
+{
+  [super updateLayoutMetrics:layoutMetrics oldLayoutMetrics:oldLayoutMetrics];
+
+  // Fixes an issue with padding set only on the external view (the container holding content view).
+  [_view setFrame:RCTCGRectFromRect(layoutMetrics.getPaddingFrame())];
+}
+
 - (void)mountChildComponentView:(UIView<RCTComponentViewProtocol> *)childComponentView index:(NSInteger)index {
   [_view.contentView insertSubview:childComponentView atIndex:index];
 }

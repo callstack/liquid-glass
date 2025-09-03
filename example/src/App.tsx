@@ -74,21 +74,17 @@ function WeatherWidget() {
         effect={'clear'}
         tintColor={'orange'}
       >
-        <View style={{ padding: 20 }}>
-          <Text style={styles.small}>Wrocław</Text>
-          <Text style={styles.temperature}>25°</Text>
-          <Text style={styles.icon}>☀</Text>
-          <Text style={styles.small}>Sunny</Text>
-        </View>
+        <Text style={styles.small}>Wrocław</Text>
+        <Text style={styles.temperature}>25°</Text>
+        <Text style={styles.icon}>☀</Text>
+        <Text style={styles.small}>Sunny</Text>
       </LiquidGlassView>
 
       <LiquidGlassView style={styles.weather} effect={'clear'} interactive>
-        <View style={{ padding: 20 }}>
-          <Text style={styles.small}>Miami</Text>
-          <Text style={styles.temperature}>35°</Text>
-          <Text style={styles.icon}>☀</Text>
-          <Text style={styles.small}>Sunny</Text>
-        </View>
+        <Text style={styles.small}>Miami</Text>
+        <Text style={styles.temperature}>35°</Text>
+        <Text style={styles.icon}>☀</Text>
+        <Text style={styles.small}>Sunny</Text>
       </LiquidGlassView>
     </View>
   );
@@ -120,11 +116,15 @@ function MergingCircles() {
           justifyContent: 'center',
         }}
       >
-        <AnimatedLiquidGlassView style={styles.circle} effect="clear" />
+        <AnimatedLiquidGlassView style={styles.circle} effect="clear">
+          <Text style={{ fontSize: 30, color: 'white' }}>1</Text>
+        </AnimatedLiquidGlassView>
         <AnimatedLiquidGlassView
           effect="clear"
           style={[styles.circle, { transform: [{ translateX }] }]}
-        />
+        >
+          <Text style={{ fontSize: 30, color: 'white' }}>2</Text>
+        </AnimatedLiquidGlassView>
       </LiquidGlassContainerView>
     </Pressable>
   );
@@ -178,6 +178,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderCurve: 'continuous',
     minWidth: 170,
+    padding: 20,
   },
   small: {
     color: 'white',
@@ -193,6 +194,8 @@ const styles = StyleSheet.create({
   },
   circle: {
     height: 120,
+    justifyContent: 'center',
+    alignItems: 'center',
     width: 120,
     borderRadius: 100,
     color: 'white',
