@@ -4,7 +4,11 @@ import {
   type CodegenTypes,
 } from 'react-native';
 
-interface NativeProps extends ViewProps {
+export interface NativeProps extends ViewProps {
+  /**
+   * The distance between elements at which they begin to merge.
+   * Defaults to 0.
+   */
   spacing?: CodegenTypes.Float;
 }
 
