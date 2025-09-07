@@ -28,6 +28,9 @@ yarn add @callstack/liquid-glass
 > [!WARNING]
 > Make sure to compile your app with Xcode >= 26.
 
+> [!WARNING]
+> React Native 0.80+ is required.
+
 ### Usage
 
 ```tsx
