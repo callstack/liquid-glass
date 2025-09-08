@@ -93,6 +93,7 @@ if (isLiquidGlassSupported) {
 | `effect`      | `'clear' \| 'regular'`          | `'regular'` | Visual effect mode:<br/>• `clear` - More transparent glass effect<br/>• `regular` - Standard glass blur effect                      |
 | `tintColor`   | `ColorValue`                    | `undefined` | Overlay color tint applied to the glass effect. Accepts any React Native color format (hex, rgba, named colors)                     |
 | `colorScheme` | `'light' \| 'dark' \| 'system'` | `'system'`  | Color scheme adaptation:<br/>• `light` - Light appearance<br/>• `dark` - Dark appearance<br/>• `system` - Follows system appearance |
+| `autoContentColor` | `boolean`                  | `true (iOS)` | When enabled, routes children through a vibrancy layer so their color adapts automatically for legibility over the glass (iOS only) |
 
 ### LiquidGlassContainerView - Props
 
