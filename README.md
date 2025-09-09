@@ -6,7 +6,8 @@
 
 `@callstack/liquid-glass` brings iOS 26 liquid glass effect to React Native apps on iOS.
 
-<img src="./assets/demo-screenshot.png" width="500" />
+https://github.com/user-attachments/assets/44c18136-8760-49f2-ae16-62557c3ae2e1
+
 </div>
 
 ## Features
