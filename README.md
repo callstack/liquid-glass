@@ -67,6 +67,26 @@ function MergingGlassElements() {
 }
 ```
 
+To achieve automatic text color adaptation based on the background behind the glass view, use `PlatformColor` from `react-native`:
+
+> [!NOTE]
+> There appears to be a size limit for the glass to automatically adapt the text color. If the glass view height is >= 65 it won't automatically adapt to the material behind it.
+
+https://github.com/user-attachments/assets/199bce70-dab4-43bc-9de1-605f561760e5
+
+```tsx
+import { PlatformColor } from 'react-native';
+import { LiquidGlassView } from '@callstack/liquid-glass';
+
+function MyComponent() {
+  return (
+    <LiquidGlassView style={{ padding: 20, borderRadius: 20 }}>
+      <Text style={{ color: PlatformColor('labelColor') }}>Hello World</Text>
+    </LiquidGlassView>
+  );
+}
+```
+
 > [!NOTE]
 > On unsupported iOS version (below iOS 26), it will render a normal `View` without any effects.
 
