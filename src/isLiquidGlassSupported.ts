@@ -1,4 +1,1 @@
-import NativeLiquidGlassModule from './NativeLiquidGlassModule';
-
-export const isLiquidGlassSupported =
-  NativeLiquidGlassModule.getConstants().isLiquidGlassSupported;
+export const isLiquidGlassSupported = false;
