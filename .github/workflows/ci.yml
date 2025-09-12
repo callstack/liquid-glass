@@ -51,7 +51,7 @@ jobs:
         run: yarn prepare
 
   build-ios:
-    runs-on: macos-latest
+    runs-on: macos-26
     env:
       TURBO_CACHE_DIR: .turbo/ios
     steps:
