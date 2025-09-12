@@ -1,8 +1,8 @@
 PODS:
   - FBLazyVector (0.81.4)
-  - hermes-engine (0.81.0):
-    - hermes-engine/Pre-built (= 0.81.0)
-  - hermes-engine/Pre-built (0.81.0)
+  - hermes-engine (0.81.4):
+    - hermes-engine/Pre-built (= 0.81.4)
+  - hermes-engine/Pre-built (0.81.4)
   - LiquidGlass (0.2.0):
     - hermes-engine
     - RCTRequired

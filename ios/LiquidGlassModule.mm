@@ -14,12 +14,14 @@
     _constants = facebook::react::typedConstants<JS::NativeLiquidGlassModule::Constants>({
       .isLiquidGlassSupported = !requiresDesignCompatibility
     });
+    
+    return;
   }
-#else
+#endif
+  
   _constants = facebook::react::typedConstants<JS::NativeLiquidGlassModule::Constants>({
     .isLiquidGlassSupported = NO
   });
-#endif
 }
 
 - (facebook::react::ModuleConstants<JS::NativeLiquidGlassModule::Constants>)constantsToExport
