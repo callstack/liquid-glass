@@ -10,11 +10,9 @@ import UIKit
     }
   }
   
-  
   public override func layoutSubviews() {
     setupView()
   }
-  
   
   private func setupView() {
     let effect = UIGlassContainerEffect()
