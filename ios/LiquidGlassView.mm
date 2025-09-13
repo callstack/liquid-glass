@@ -63,11 +63,15 @@ using namespace facebook::react;
   if (oldViewProps.effect != newViewProps.effect) {
     switch (newViewProps.effect) {
       case LiquidGlassViewEffect::Regular:
-        [_view setStyle:UIGlassEffectStyleRegular];
+        [_view setStyle:LiquidGlassEffectRegular];
         break;
         
       case LiquidGlassViewEffect::Clear:
-        [_view setStyle:UIGlassEffectStyleClear];
+        [_view setStyle:LiquidGlassEffectClear];
+        break;
+        
+      case LiquidGlassViewEffect::None:
+        [_view setStyle:LiquidGlassEffectNone];
         break;
     }
   }

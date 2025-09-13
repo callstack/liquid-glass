@@ -13,6 +13,7 @@ import {
   LiquidGlassView,
   LiquidGlassContainerView,
   isLiquidGlassSupported,
+  type LiquidGlassViewProps,
 } from '@callstack/liquid-glass';
 import { useEffect, useState } from 'react';
 
@@ -37,7 +38,7 @@ export default function App() {
         }}
       />
       <ScrollView style={styles.container}>
-        <WeatherWidget />
+        <WeatherWidgets />
         <Button />
         <MergingCircles />
       </ScrollView>
@@ -46,46 +47,93 @@ export default function App() {
 }
 
 function Button() {
+  const [isGlassy, setIsGlassy] = useState(true);
   return (
-    <LiquidGlassView style={styles.button} interactive colorScheme="dark">
-      <Text
-        style={{
-          padding: 20,
-          color: 'white',
-          fontSize: 24,
-          fontWeight: 'bold',
-        }}
+    <Pressable onPress={() => setIsGlassy((prev) => !prev)}>
+      <LiquidGlassView
+        style={styles.button}
+        colorScheme="dark"
+        effect={isGlassy ? 'regular' : 'none'}
       >
-        Click me
-      </Text>
+        <Text
+          style={{
+            padding: 20,
+            color: 'white',
+            fontSize: 24,
+            fontWeight: 'bold',
+          }}
+        >
+          Click me
+        </Text>
+      </LiquidGlassView>
+    </Pressable>
+  );
+}
+
+interface WeatherWidgetProps extends LiquidGlassViewProps {
+  city: string;
+  temperature: number;
+  description: string;
+}
+
+function WeatherWidget({
+  city,
+  temperature,
+  description,
+  ...props
+}: WeatherWidgetProps) {
+  return (
+    <LiquidGlassView
+      style={[
+        styles.weather,
+        !isLiquidGlassSupported && { backgroundColor: 'rgba(0,0,0,0.4)' },
+      ]}
+      {...props}
+    >
+      <Text style={styles.small}>{city}</Text>
+      <Text style={styles.temperature}>{temperature}°</Text>
+      <Text style={styles.icon}>☀</Text>
+      <Text style={styles.small}>{description}</Text>
     </LiquidGlassView>
   );
 }
 
-function WeatherWidget() {
+function WeatherWidgets() {
   return (
-    <View style={{ flexDirection: 'row', gap: 10, marginBottom: 20 }}>
-      <LiquidGlassView
-        style={[
-          styles.weather,
-          !isLiquidGlassSupported && { backgroundColor: 'rgba(255,165,0,0.3)' },
-        ]}
-        interactive={true}
-        effect={'clear'}
-        tintColor={'orange'}
-      >
-        <Text style={styles.small}>Wrocław</Text>
-        <Text style={styles.temperature}>25°</Text>
-        <Text style={styles.icon}>☀</Text>
-        <Text style={styles.small}>Sunny</Text>
-      </LiquidGlassView>
+    <View>
+      <View style={{ flexDirection: 'row', gap: 10, marginBottom: 20 }}>
+        <WeatherWidget
+          city="Wrocław"
+          temperature={25}
+          description="Sunny"
+          effect="clear"
+          interactive
+          tintColor={'orange'}
+        />
+        <WeatherWidget
+          city="Miami"
+          temperature={35}
+          description="Sunny"
+          interactive
+          colorScheme="dark"
+        />
+      </View>
 
-      <LiquidGlassView style={styles.weather} effect={'clear'} interactive>
-        <Text style={styles.small}>Miami</Text>
-        <Text style={styles.temperature}>35°</Text>
-        <Text style={styles.icon}>☀</Text>
-        <Text style={styles.small}>Sunny</Text>
-      </LiquidGlassView>
+      <View style={{ flexDirection: 'row', gap: 10, marginBottom: 20 }}>
+        <WeatherWidget
+          city="Warsaw"
+          temperature={20}
+          description="Sunny"
+          interactive
+          effect="clear"
+        />
+        <WeatherWidget
+          city="Szczecin"
+          temperature={22}
+          description="Sunny"
+          interactive
+        />
+      </View>
     </View>
   );
 }
