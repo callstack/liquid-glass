@@ -8,15 +8,20 @@
 {
 #if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 260000 /* __IPHONE_26_0 */
   if (@available(iOS 26.0, *)) {
+    NSDictionary *infoPlist = [[NSBundle mainBundle] infoDictionary];
+    BOOL requiresDesignCompatibility = infoPlist[@"UIDesignRequiresCompatibility"];
+    
     _constants = facebook::react::typedConstants<JS::NativeLiquidGlassModule::Constants>({
-      .isLiquidGlassSupported = YES
+      .isLiquidGlassSupported = !requiresDesignCompatibility
     });
+    
+    return;
   }
-#else
+#endif
+  
   _constants = facebook::react::typedConstants<JS::NativeLiquidGlassModule::Constants>({
     .isLiquidGlassSupported = NO
   });
-#endif
 }
 
 - (facebook::react::ModuleConstants<JS::NativeLiquidGlassModule::Constants>)constantsToExport
