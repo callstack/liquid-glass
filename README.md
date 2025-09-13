@@ -3,6 +3,8 @@
 
 [![mit licence](https://img.shields.io/dub/l/vibe-d.svg?style=for-the-badge)](https://github.com/callstack/liquid-glass/blob/main/LICENSE)
 [![npm version](https://img.shields.io/npm/v/@callstack/liquid-glass?style=for-the-badge)](https://www.npmjs.org/package/@callstack/liquid-glass)
+[![npm downloads](https://img.shields.io/npm/dt/@callstack/liquid-glass.svg?style=for-the-badge)](https://www.npmjs.org/package/@callstack/liquid-glass)
+[![npm downloads](https://img.shields.io/npm/dm/@callstack/liquid-glass.svg?style=for-the-badge)](https://www.npmjs.org/package/@callstack/liquid-glass)
 
 `@callstack/liquid-glass` brings iOS 26 liquid glass effect to React Native apps on iOS.
 
