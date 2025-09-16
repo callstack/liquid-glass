@@ -5,6 +5,7 @@ import UIKit
   case clear
   case none
 
+#if compiler(>=6.2)
   @available(iOS 26.0, *)
   var converted: UIGlassEffect.Style? {
     switch self {
@@ -16,6 +17,8 @@ import UIKit
       return nil
     }
   }
+#endif
+
 }
 
 #if compiler(>=6.2)
@@ -30,13 +33,13 @@ import UIKit
   public override func layoutSubviews() {
     if (self.effect != nil) { return }
     setupView()
-    
+
     if isFirstMount {
       isFirstMount = false
     }
   }
-  
-  
+
+
   @available(iOS 26.0, *)
   @objc public func setupView() {
     guard let preferredStyle = style.converted else {
@@ -46,11 +49,11 @@ import UIKit
       }
       return
     }
-    
+
     let glassEffect = UIGlassEffect(style: preferredStyle)
     glassEffect.isInteractive = interactive
     glassEffect.tintColor = effectTintColor
-    
+
     if isFirstMount {
       self.effect = glassEffect
     } else {
