@@ -26,9 +26,15 @@ import UIKit
 @available(iOS 26.0, *)
 @objc public class LiquidGlassViewImpl: UIVisualEffectView {
   private var isFirstMount: Bool = true
-  @objc public var effectTintColor: UIColor?
-  @objc public var interactive: Bool = false
-  @objc public var style: LiquidGlassEffect = .regular
+  @objc public var effectTintColor: UIColor? {
+    didSet { self.setupView() }
+  }
+  @objc public var interactive: Bool = false {
+    didSet { self.setupView() }
+  }
+  @objc public var style: LiquidGlassEffect = .regular {
+    didSet { self.setupView() }
+  }
 
   public override func layoutSubviews() {
     if (self.effect != nil) { return }
