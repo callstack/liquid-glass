@@ -55,7 +55,7 @@ using namespace facebook::react;
 {
   const auto &oldViewProps = *std::static_pointer_cast<LiquidGlassViewProps const>(_props);
   const auto &newViewProps = *std::static_pointer_cast<LiquidGlassViewProps const>(props);
-  
+
   if (oldViewProps.tintColor != newViewProps.tintColor) {
     _view.effectTintColor = RCTUIColorFromSharedColor(newViewProps.tintColor);
   }
@@ -101,16 +101,7 @@ using namespace facebook::react;
     _view.layer.cornerCurve = self.layer.cornerCurve;
   }
   
-  
   [super updateProps:props oldProps:oldProps];
-}
-
-- (void)finalizeUpdates:(RNComponentViewUpdateMask)updateMask {
-  [super finalizeUpdates:updateMask];
-  
-  if (updateMask == RNComponentViewUpdateMaskProps) {
-    [_view setupView];
-  }
 }
 
 - (void)updateLayoutMetrics:(const LayoutMetrics &)layoutMetrics
