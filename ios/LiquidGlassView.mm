@@ -55,9 +55,11 @@ using namespace facebook::react;
 {
   const auto &oldViewProps = *std::static_pointer_cast<LiquidGlassViewProps const>(_props);
   const auto &newViewProps = *std::static_pointer_cast<LiquidGlassViewProps const>(props);
-
+  BOOL needsSetup = NO;
+  
   if (oldViewProps.tintColor != newViewProps.tintColor) {
     _view.effectTintColor = RCTUIColorFromSharedColor(newViewProps.tintColor);
+    needsSetup = YES;
   }
   
   if (oldViewProps.effect != newViewProps.effect) {
@@ -74,10 +76,13 @@ using namespace facebook::react;
         [_view setStyle:LiquidGlassEffectNone];
         break;
     }
+    
+    needsSetup = YES;
   }
   
   if (oldViewProps.interactive != newViewProps.interactive) {
     _view.interactive = newViewProps.interactive;
+    needsSetup = YES;
   }
   
   if (oldViewProps.colorScheme != newViewProps.colorScheme) {
@@ -94,11 +99,16 @@ using namespace facebook::react;
         _view.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
         break;
     }
+    needsSetup = YES;
   }
   
   if (oldViewProps.borderRadii != newViewProps.borderRadii) {
     _view.layer.cornerRadius = self.layer.cornerRadius;
     _view.layer.cornerCurve = self.layer.cornerCurve;
+  }
+  
+  if (needsSetup) {
+    [_view setupView];
   }
   
   [super updateProps:props oldProps:oldProps];
