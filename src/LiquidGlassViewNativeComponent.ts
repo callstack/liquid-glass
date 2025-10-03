@@ -33,6 +33,13 @@ export interface NativeProps extends ViewProps {
    * Defaults to 'system'.
    */
   colorScheme?: CodegenTypes.WithDefault<'light' | 'dark' | 'system', 'system'>;
+  /**
+   * Automatically adjusts the color of child content for legibility
+   * over the glass material using a vibrancy effect on iOS.
+   *
+   * Defaults to `true` on iOS. No-op on other platforms.
+   */
+  autoContentColor?: CodegenTypes.WithDefault<boolean, true>;
 }
 
 export default codegenNativeComponent<NativeProps>('LiquidGlassView');

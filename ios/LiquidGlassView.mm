@@ -23,6 +23,8 @@ using namespace facebook::react;
 
 @implementation LiquidGlassView {
   LiquidGlassViewImpl * _view;
+  UIVisualEffectView *_vibrancyView;
+  BOOL _autoContentColor;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider
@@ -37,6 +39,14 @@ using namespace facebook::react;
     _props = defaultProps;
     
     _view = [[LiquidGlassViewImpl alloc] init];
+    _autoContentColor = YES;
+    
+    // Create a vibrancy view to automatically adapt child content color for legibility
+    // over glass material. Children will be mounted into this container when enabled.
+    _vibrancyView = [[UIVisualEffectView alloc] initWithEffect:[UIVibrancyEffect effectWithStyle:UIVibrancyEffectStyleLabel]];
+    _vibrancyView.frame = _view.bounds;
+    _vibrancyView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [_view.contentView addSubview:_vibrancyView];
     
     self.contentView = _view;
   }
@@ -84,6 +94,32 @@ using namespace facebook::react;
     _view.interactive = newViewProps.interactive;
     needsSetup = YES;
   }
+
+  // Toggle automatic content color (vibrancy) for mounted children
+  if (oldViewProps.autoContentColor != newViewProps.autoContentColor) {
+    BOOL newValue = newViewProps.autoContentColor;
+    if (_autoContentColor != newValue) {
+      _autoContentColor = newValue;
+      if (_autoContentColor) {
+        if (_vibrancyView.superview == nil) {
+          _vibrancyView.frame = _view.bounds;
+          _vibrancyView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+          [_view.contentView addSubview:_vibrancyView];
+        }
+        for (UIView *subview in [[_view.contentView.subviews copy] objectEnumerator]) {
+          if (subview == _vibrancyView) { continue; }
+          [subview removeFromSuperview];
+          [_vibrancyView.contentView addSubview:subview];
+        }
+      } else {
+        for (UIView *subview in [[_vibrancyView.contentView.subviews copy] objectEnumerator]) {
+          [subview removeFromSuperview];
+          [_view.contentView addSubview:subview];
+        }
+        [_vibrancyView removeFromSuperview];
+      }
+    }
+  }
   
   if (oldViewProps.colorScheme != newViewProps.colorScheme) {
     switch (newViewProps.colorScheme) {
@@ -124,7 +160,8 @@ using namespace facebook::react;
 }
 
 - (void)mountChildComponentView:(UIView<RCTComponentViewProtocol> *)childComponentView index:(NSInteger)index {
-  [_view.contentView insertSubview:childComponentView atIndex:index];
+  UIView *container = _autoContentColor ? _vibrancyView.contentView : _view.contentView;
+  [container insertSubview:childComponentView atIndex:index];
 }
 
 - (void)unmountChildComponentView:(UIView<RCTComponentViewProtocol> *)childComponentView index:(NSInteger)index {
