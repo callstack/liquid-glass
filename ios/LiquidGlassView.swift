@@ -40,8 +40,11 @@ import UIKit
   }
 
 
-  @available(iOS 26.0, *)
   @objc public func setupView() {
+    guard #available(iOS 26.0, *) else {
+      return
+    }
+
     guard let preferredStyle = style.converted else {
       UIView.animate {
         // TODO: Looks like only assigning nil is not working, check this after stable iOS 26 is rolled out.
