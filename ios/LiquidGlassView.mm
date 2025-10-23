@@ -23,6 +23,7 @@ using namespace facebook::react;
 
 @implementation LiquidGlassView {
   LiquidGlassViewImpl * _view;
+  BOOL _needsInvalidateLayer;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider
@@ -102,9 +103,10 @@ using namespace facebook::react;
     needsSetup = YES;
   }
   
-  if (oldViewProps.borderRadii != newViewProps.borderRadii) {
-    _view.layer.cornerRadius = self.layer.cornerRadius;
-    _view.layer.cornerCurve = self.layer.cornerCurve;
+  // `border`
+  if (oldViewProps.borderStyles != newViewProps.borderStyles || oldViewProps.borderRadii != newViewProps.borderRadii ||
+      oldViewProps.borderColors != newViewProps.borderColors) {
+    _needsInvalidateLayer = YES;
   }
   
   if (needsSetup) {
@@ -112,6 +114,28 @@ using namespace facebook::react;
   }
   
   [super updateProps:props oldProps:oldProps];
+}
+
+- (void)finalizeUpdates:(RNComponentViewUpdateMask)updateMask {
+  [super finalizeUpdates:updateMask];
+  
+  if (!_needsInvalidateLayer) {
+    return;
+  }
+  
+  _needsInvalidateLayer = NO;
+  
+  if (@available(iOS 26.0, *)) {
+    const auto borderMetrics = _props->resolveBorderMetrics(_layoutMetrics);
+    
+    if (!borderMetrics.borderRadii.isUniform()) {
+      // TODO: Handle non uniform border radius
+      NSLog(@"[@callstack/liquid-glass] Using uneven border radius is not yet supported on glass elements.");
+    }
+    
+    // Use topLeft.horizontal same as React Native RCTViewComponentView implementation: https://github.com/facebook/react-native/blob/b823b26a3765cbf4506df0981e3350e0bae3ad62/packages/react-native/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm#L988C26-L988C80
+    _view.cornerConfiguration = [UICornerConfiguration configurationWithRadius:[UICornerRadius fixedRadius:borderMetrics.borderRadii.topLeft.horizontal]];
+  }
 }
 
 - (void)updateLayoutMetrics:(const LayoutMetrics &)layoutMetrics

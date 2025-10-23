@@ -1,9 +1,14 @@
 PODS:
+  - ComputableLayout (0.7.0):
+    - DGSwiftUtilities (~> 0.11)
+  - ContextMenuAuxiliaryPreview (0.5.2):
+    - DGSwiftUtilities (~> 0.29)
+  - DGSwiftUtilities (0.47.0)
   - FBLazyVector (0.81.4)
   - hermes-engine (0.81.4):
     - hermes-engine/Pre-built (= 0.81.4)
   - hermes-engine/Pre-built (0.81.4)
-  - LiquidGlass (0.3.0):
+  - LiquidGlass (0.4.2):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1304,6 +1309,62 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
+  - react-native-ios-context-menu (3.2.1):
+    - ContextMenuAuxiliaryPreview (~> 0.5)
+    - DGSwiftUtilities
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-jsinspector
+    - React-jsinspectortracing
+    - react-native-ios-utilities
+    - React-NativeModulesApple
+    - React-RCTAppDelegate
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
+  - react-native-ios-utilities (5.2.0):
+    - ComputableLayout (~> 0.7)
+    - DGSwiftUtilities (~> 0.46)
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-jsinspector
+    - React-jsinspectortracing
+    - React-jsitooling
+    - React-NativeModulesApple
+    - React-RCTAppDelegate
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
   - react-native-safe-area-context (5.6.1):
     - hermes-engine
     - RCTRequired
@@ -1808,6 +1869,8 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
+  - react-native-ios-context-menu (from `../node_modules/react-native-ios-context-menu`)
+  - react-native-ios-utilities (from `../node_modules/react-native-ios-utilities`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
@@ -1842,6 +1905,12 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - ReactNativeDependencies (from `../node_modules/react-native/third-party-podspecs/ReactNativeDependencies.podspec`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
+
+SPEC REPOS:
+  trunk:
+    - ComputableLayout
+    - ContextMenuAuxiliaryPreview
+    - DGSwiftUtilities
 
 EXTERNAL SOURCES:
   FBLazyVector:
@@ -1917,6 +1986,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
+  react-native-ios-context-menu:
+    :path: "../node_modules/react-native-ios-context-menu"
+  react-native-ios-utilities:
+    :path: "../node_modules/react-native-ios-utilities"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-slider:
@@ -1987,9 +2060,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  ComputableLayout: c50faffac4ed9f8f05b0ce5e6f3a60df1f6042c8
+  ContextMenuAuxiliaryPreview: 20be0be795b783b68f8792732eed4bed9f202c1c
+  DGSwiftUtilities: 567f8d5ee618f0b7afb185b17aa45ff356315a0f
   FBLazyVector: 9e0cd874afd81d9a4d36679daca991b58b260d42
   hermes-engine: 35c763d57c9832d0eef764316ca1c4d043581394
-  LiquidGlass: 2684e8e6ef8a1d206c6009f98271f1d42d42a3dc
+  LiquidGlass: 6937b48f2c38c97bc4f512aad93f582e86cd7afa
   RCTDeprecation: 7487d6dda857ccd4cb3dd6ecfccdc3170e85dcbc
   RCTRequired: 54128b7df8be566881d48c7234724a78cb9b6157
   RCTTypeSafety: d2b07797a79e45d7b19e1cd2f53c79ab419fe217
@@ -2023,6 +2099,8 @@ SPEC CHECKSUMS:
   React-logger: 7b234de35acb469ce76d6bbb0457f664d6f32f62
   React-Mapbuffer: fbe1da882a187e5898bdf125e1cc6e603d27ecae
   React-microtasksnativemodule: 76905804171d8ccbe69329fc84c57eb7934add7f
+  react-native-ios-context-menu: 9f23509b5722166590c4c53180991319cc44e286
+  react-native-ios-utilities: 14afbb6d64f67dce464df5e4bf09d3e80334adde
   react-native-safe-area-context: 42a1b4f8774b577d03b53de7326e3d5757fe9513
   react-native-slider: 8c562583722c396a3682f451f0b6e68e351ec3b9
   React-NativeModulesApple: a9464983ccc0f66f45e93558671f60fc7536e438
