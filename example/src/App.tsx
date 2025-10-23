@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import {
   ScrollView,
   StyleSheet,
@@ -8,6 +7,7 @@ import {
   Animated,
   View,
   Pressable,
+  PlatformColor,
 } from 'react-native';
 import {
   LiquidGlassView,
@@ -16,6 +16,40 @@ import {
   type LiquidGlassViewProps,
 } from '@callstack/liquid-glass';
 import { useEffect, useState } from 'react';
+import * as DropdownMenu from 'zeego/dropdown-menu';
+
+function DropdownMenuButton({ title }: { title?: string }) {
+  return (
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger>
+        <Text style={styles.dropdownTrigger}>{title}</Text>
+      </DropdownMenu.Trigger>
+      <DropdownMenu.Content>
+        <DropdownMenu.Item key="first">
+          <DropdownMenu.ItemTitle>First</DropdownMenu.ItemTitle>
+        </DropdownMenu.Item>
+        <DropdownMenu.Item key="second">
+          <DropdownMenu.ItemTitle>Second</DropdownMenu.ItemTitle>
+        </DropdownMenu.Item>
+        <DropdownMenu.Item key="third">
+          <DropdownMenu.ItemTitle>Third</DropdownMenu.ItemTitle>
+        </DropdownMenu.Item>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
+  );
+}
+
+function LiquidToolBar() {
+  return (
+    <LiquidGlassView style={styles.toolbar}>
+      <DropdownMenuButton title="File" />
+      <DropdownMenuButton title="Edit" />
+      <DropdownMenuButton title="View" />
+      <DropdownMenuButton title="Window" />
+      <DropdownMenuButton title="Help" />
+    </LiquidGlassView>
+  );
+}
 
 const AnimatedLiquidGlassView =
   Animated.createAnimatedComponent(LiquidGlassView);
@@ -42,6 +76,7 @@ export default function App() {
         <Button />
         <MergingCircles />
       </ScrollView>
+      <LiquidToolBar />
     </>
   );
 }
@@ -251,5 +286,22 @@ const styles = StyleSheet.create({
   circles: {
     flexDirection: 'row',
     gap: 10,
+  },
+  toolbar: {
+    flexDirection: 'row',
+    gap: 10,
+    padding: 10,
+    position: 'absolute',
+    borderRadius: 40,
+    bottom: 50,
+    left: 20,
+    right: 20,
+    justifyContent: 'center',
+  },
+  dropdownTrigger: {
+    padding: 10,
+    color: PlatformColor('labelColor'),
+    fontFamily: 'System',
+    fontWeight: '600',
   },
 });

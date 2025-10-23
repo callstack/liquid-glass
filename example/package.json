@@ -14,7 +14,10 @@
     "@react-native/new-app-screen": "0.81.4",
     "react": "19.1.0",
     "react-native": "0.81.4",
-    "react-native-safe-area-context": "^5.5.2"
+    "react-native-ios-context-menu": "3.2.1",
+    "react-native-ios-utilities": "5.2.0",
+    "react-native-safe-area-context": "^5.5.2",
+    "zeego": "^3.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
