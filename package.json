@@ -1,6 +1,6 @@
 {
   "name": "@callstack/liquid-glass",
-  "version": "0.4.3",
+  "version": "0.5.0",
   "description": "Liquid Glass in React Native",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
