@@ -127,14 +127,21 @@ using namespace facebook::react;
   
   if (@available(iOS 26.0, *)) {
     const auto borderMetrics = _props->resolveBorderMetrics(_layoutMetrics);
+
+
+    auto borderRadii = borderMetrics.borderRadii;
     
-    if (!borderMetrics.borderRadii.isUniform()) {
-      // TODO: Handle non uniform border radius
-      NSLog(@"[@callstack/liquid-glass] Using uneven border radius is not yet supported on glass elements.");
-    }
-    
-    // Use topLeft.horizontal same as React Native RCTViewComponentView implementation: https://github.com/facebook/react-native/blob/b823b26a3765cbf4506df0981e3350e0bae3ad62/packages/react-native/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm#L988C26-L988C80
-    _view.cornerConfiguration = [UICornerConfiguration configurationWithRadius:[UICornerRadius fixedRadius:borderMetrics.borderRadii.topLeft.horizontal]];
+    CGFloat topLeftRadius = MAX(borderRadii.topLeft.horizontal, borderRadii.topLeft.vertical);
+    CGFloat topRightRadius = MAX(borderRadii.topRight.horizontal, borderRadii.topRight.vertical);
+    CGFloat bottomLeftRadius = MAX(borderRadii.bottomLeft.horizontal, borderRadii.bottomLeft.vertical);
+    CGFloat bottomRightRadius = MAX(borderRadii.bottomRight.horizontal, borderRadii.bottomRight.vertical);
+
+    UICornerRadius *topLeft = [UICornerRadius fixedRadius:topLeftRadius];
+    UICornerRadius *topRight = [UICornerRadius fixedRadius:topRightRadius];
+    UICornerRadius *bottomLeft = [UICornerRadius fixedRadius:bottomLeftRadius];
+    UICornerRadius *bottomRight = [UICornerRadius fixedRadius:bottomRightRadius];
+
+    _view.cornerConfiguration = [UICornerConfiguration configurationWithTopLeftRadius:topLeft topRightRadius:topRight bottomLeftRadius:bottomLeft bottomRightRadius:bottomRight];
   }
 }
 
@@ -142,6 +149,8 @@ using namespace facebook::react;
            oldLayoutMetrics:(const LayoutMetrics &)oldLayoutMetrics
 {
   [super updateLayoutMetrics:layoutMetrics oldLayoutMetrics:oldLayoutMetrics];
+
+  _needsInvalidateLayer = YES;
 
   // Fixes an issue with padding set only on the external view (the container holding content view).
   [_view setFrame:RCTCGRectFromRect(layoutMetrics.getPaddingFrame())];
