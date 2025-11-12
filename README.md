@@ -29,10 +29,12 @@ yarn add @callstack/liquid-glass
 ```
 
 > [!WARNING]
-> Make sure to compile your app with Xcode >= 26.
+> Make sure to compile your app with Xcode >= 26. React Native 0.80+ is required.
 
 > [!WARNING]
-> React Native 0.80+ is required.
+> This library is not supported in [Expo Go](https://expo.dev/go).
+
+
 
 ### Usage
 
