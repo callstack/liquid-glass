@@ -45,6 +45,18 @@ import UIKit
       return
     }
 
+    // Runtime check to ensure UIGlassEffect is available
+    // This handles cases where early iOS 26 beta releases may not have this API
+    guard let glassEffectClass = NSClassFromString("UIGlassEffect") as? NSObject.Type else {
+      return
+    }
+    
+    // Verify that the effectWithStyle: selector is available
+    // This provides an additional safety check for early beta versions
+    guard glassEffectClass.responds(to: Selector(("effectWithStyle:"))) else {
+      return
+    }
+
     guard let preferredStyle = style.converted else {
       UIView.animate {
         // TODO: Looks like only assigning nil is not working, check this after stable iOS 26 is rolled out.
@@ -71,4 +83,3 @@ import UIKit
 @objc public class LiquidGlassViewImpl: UIView {}
 
 #endif
-
