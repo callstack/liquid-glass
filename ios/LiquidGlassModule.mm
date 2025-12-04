@@ -9,7 +9,7 @@
 #if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 260000 /* __IPHONE_26_0 */
   if (@available(iOS 26.0, *)) {
     NSDictionary *infoPlist = [[NSBundle mainBundle] infoDictionary];
-    BOOL requiresDesignCompatibility = infoPlist[@"UIDesignRequiresCompatibility"];
+    BOOL requiresDesignCompatibility = [infoPlist[@"UIDesignRequiresCompatibility"] boolValue];
     
     _constants = facebook::react::typedConstants<JS::NativeLiquidGlassModule::Constants>({
       .isLiquidGlassSupported = !requiresDesignCompatibility
