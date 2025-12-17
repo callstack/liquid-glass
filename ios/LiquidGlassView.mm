@@ -45,7 +45,8 @@ using namespace facebook::react;
   return self;
 }
 
-#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 260000 /* __IPHONE_26_0 */
+#if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 260000) || \
+    (defined(__TV_OS_VERSION_MAX_ALLOWED) && __TV_OS_VERSION_MAX_ALLOWED >= 260000)
 - (void)layoutSubviews {
   [super layoutSubviews];
   _view.layer.cornerRadius = self.layer.cornerRadius;
@@ -125,7 +126,7 @@ using namespace facebook::react;
   
   _needsInvalidateLayer = NO;
   
-  if (@available(iOS 26.0, *)) {
+  if (@available(iOS 26.0, tvOS 26.0, *)) {
     const auto borderMetrics = _props->resolveBorderMetrics(_layoutMetrics);
 
 

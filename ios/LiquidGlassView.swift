@@ -6,7 +6,7 @@ import UIKit
   case none
 
 #if compiler(>=6.2)
-  @available(iOS 26.0, *)
+  @available(iOS 26.0, tvOS 26.0, *)
   var converted: UIGlassEffect.Style? {
     switch self {
     case .regular:
@@ -23,7 +23,7 @@ import UIKit
 
 #if compiler(>=6.2)
 
-@available(iOS 26.0, *)
+@available(iOS 26.0, tvOS 26.0, *)
 @objc public class LiquidGlassViewImpl: UIVisualEffectView {
   private var isFirstMount: Bool = true
   @objc public var effectTintColor: UIColor?
@@ -41,7 +41,7 @@ import UIKit
 
 
   @objc public func setupView() {
-    guard #available(iOS 26.0, *) else {
+    guard #available(iOS 26.0, tvOS 26.0, *) else {
       return
     }
 
