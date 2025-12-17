@@ -6,8 +6,9 @@
 
 - (void)initialize
 {
-#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 260000 /* __IPHONE_26_0 */
-  if (@available(iOS 26.0, *)) {
+#if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 260000) || \
+    (defined(__TV_OS_VERSION_MAX_ALLOWED) && __TV_OS_VERSION_MAX_ALLOWED >= 260000)
+  if (@available(iOS 26.0, tvOS 26.0, *)) {
     NSDictionary *infoPlist = [[NSBundle mainBundle] infoDictionary];
     BOOL requiresDesignCompatibility = [infoPlist[@"UIDesignRequiresCompatibility"] boolValue];
     
