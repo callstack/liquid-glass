@@ -75,6 +75,14 @@ import UIKit
       // Animate only the effect is changed after first mount.
       UIView.animate { self.effect = glassEffect }
     }
+
+    // UIGlassEffect can reconfigure the internal contentView in a way that
+    // disables user interaction when no subviews are present at the time the
+    // effect is applied. In React Native (Fabric), child component views may
+    // be mounted into contentView *after* layoutSubviews triggers setupView(),
+    // leaving contentView with userInteractionEnabled == false for the
+    // lifetime of this view. Force it back on so touches always reach children.
+    self.contentView.isUserInteractionEnabled = true
   }
 }
 
