@@ -1,4 +1,3 @@
-ENV['RCT_NEW_ARCH_ENABLED'] = '1'
 ENV['RCT_USE_PREBUILT_RNCORE'] = '1'
 ENV['RCT_USE_RN_DEP'] = '1'
 
@@ -28,7 +27,6 @@ target 'LiquidGlassExample' do
   )
 
   post_install do |installer|
-    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
     react_native_post_install(
       installer,
       config[:reactNativePath],

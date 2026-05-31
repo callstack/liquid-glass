@@ -15,17 +15,11 @@
   "files": [
     "src",
     "lib",
-    "android",
     "ios",
     "cpp",
     "*.podspec",
     "react-native.config.js",
     "!ios/build",
-    "!android/build",
-    "!android/gradle",
-    "!android/gradlew",
-    "!android/gradlew.bat",
-    "!android/local.properties",
     "!**/__tests__",
     "!**/__fixtures__",
     "!**/__mocks__",
@@ -33,17 +27,15 @@
   ],
   "scripts": {
     "example": "yarn workspace @callstack/liquid-glass-example",
-    "test": "jest",
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
+    "clean": "del-cli example/ios/build lib",
     "prepare": "bob build",
     "release": "release-it --only-version"
   },
   "keywords": [
     "react-native",
-    "ios",
-    "android"
+    "ios"
   ],
   "repository": {
     "type": "git",
@@ -59,30 +51,29 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^19.6.0",
-    "@eslint/compat": "^1.2.7",
-    "@eslint/eslintrc": "^3.3.0",
-    "@eslint/js": "^9.22.0",
-    "@evilmartians/lefthook": "^1.5.0",
-    "@react-native-community/cli": "15.0.0-alpha.2",
-    "@react-native/babel-preset": "0.81.0",
-    "@react-native/eslint-config": "^0.78.0",
-    "@release-it/conventional-changelog": "^9.0.2",
-    "@types/jest": "^29.5.5",
-    "@types/react": "^19.1.0",
-    "commitlint": "^19.6.1",
-    "del-cli": "^5.1.0",
-    "eslint": "^9.22.0",
-    "eslint-config-prettier": "^10.1.1",
-    "eslint-plugin-prettier": "^5.2.3",
-    "jest": "^29.7.0",
-    "prettier": "^3.0.3",
-    "react": "19.1.0",
-    "react-native": "0.81.0",
-    "react-native-builder-bob": "^0.40.13",
+    "@commitlint/config-conventional": "^20.5.0",
+    "@eslint/compat": "^2.0.3",
+    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/js": "^10.0.1",
+    "@react-native/babel-preset": "0.85.0",
+    "@react-native/eslint-config": "0.85.0",
+    "@release-it/conventional-changelog": "^10.0.6",
+    "@types/react": "^19.2.0",
+    "commitlint": "^20.5.0",
+    "del-cli": "^7.0.0",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-ft-flow": "^3.0.11",
+    "eslint-plugin-prettier": "^5.5.5",
+    "hermes-eslint": "^0.36.1",
+    "lefthook": "^2.1.4",
+    "prettier": "^3.8.1",
+    "react": "19.2.3",
+    "react-native": "0.85.0",
+    "react-native-builder-bob": "^0.41.0",
     "release-it": "^19.2.4",
-    "turbo": "^1.10.7",
-    "typescript": "^5.8.3"
+    "turbo": "^2.8.21",
+    "typescript": "^6.0.2"
   },
   "peerDependencies": {
     "react": "*",
@@ -91,14 +82,7 @@
   "workspaces": [
     "example"
   ],
-  "packageManager": "yarn@3.6.1",
-  "jest": {
-    "preset": "react-native",
-    "modulePathIgnorePatterns": [
-      "<rootDir>/example/node_modules",
-      "<rootDir>/lib/"
-    ]
-  },
+  "packageManager": "yarn@4.15.0",
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
@@ -152,9 +136,6 @@
     "name": "LiquidGlassViewSpec",
     "type": "all",
     "jsSrcsDir": "src",
-    "android": {
-      "javaPackageName": "com.callstack.liquidglass"
-    },
     "ios": {
       "componentProvider": {
         "LiquidGlassView": "LiquidGlassView",
@@ -166,8 +147,13 @@
     }
   },
   "create-react-native-library": {
-    "languages": "kotlin-objc",
     "type": "fabric-view",
-    "version": "0.53.0"
+    "languages": "kotlin-objc",
+    "tools": [
+      "eslint",
+      "lefthook",
+      "release-it"
+    ],
+    "version": "0.62.0"
   }
 }
