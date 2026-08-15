@@ -4,7 +4,12 @@
 #import <react/renderer/components/LiquidGlassViewSpec/EventEmitters.h>
 #import <react/renderer/components/LiquidGlassViewSpec/Props.h>
 #import <react/renderer/components/LiquidGlassViewSpec/RCTComponentViewHelpers.h>
+#if __has_include(<react/renderer/imagemanager/RCTImagePrimitivesConversions.h>)
+// react-native 0.87+
 #import <react/renderer/imagemanager/RCTImagePrimitivesConversions.h>
+#else
+#import "RCTImagePrimitivesConversions.h"
+#endif
 
 #import <React/RCTFabricComponentsPlugins.h>
 #import <React/RCTConversions.h>
