@@ -4,10 +4,10 @@
 #import <react/renderer/components/LiquidGlassViewSpec/EventEmitters.h>
 #import <react/renderer/components/LiquidGlassViewSpec/Props.h>
 #import <react/renderer/components/LiquidGlassViewSpec/RCTComponentViewHelpers.h>
-#import "RCTImagePrimitivesConversions.h"
+#import <react/renderer/imagemanager/RCTImagePrimitivesConversions.h>
 
-#import "RCTFabricComponentsPlugins.h"
-#import "RCTConversions.h"
+#import <React/RCTFabricComponentsPlugins.h>
+#import <React/RCTConversions.h>
 
 #if __has_include("LiquidGlass/LiquidGlass-Swift.h")
 #import "LiquidGlass/LiquidGlass-Swift.h"
