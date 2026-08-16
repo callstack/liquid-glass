@@ -5,7 +5,7 @@
 #import <react/renderer/components/LiquidGlassViewSpec/Props.h>
 #import <react/renderer/components/LiquidGlassViewSpec/RCTComponentViewHelpers.h>
 
-#import "RCTFabricComponentsPlugins.h"
+#import <React/RCTFabricComponentsPlugins.h>
 
 #if __has_include("LiquidGlass/LiquidGlass-Swift.h")
 #import "LiquidGlass/LiquidGlass-Swift.h"
@@ -67,4 +67,3 @@ using namespace facebook::react;
 #endif
 
 @end
-
