@@ -1,0 +1,38 @@
+diff --git a/Libraries/Utilities/codegenNativeComponent.d.ts b/Libraries/Utilities/codegenNativeComponent.d.ts
+index d9c165fa35fc1ce6b64f2ac7c6a6762cc08172b9..65757e1c8e096fae3546c47333d14f0459c56ce8 100644
+--- a/Libraries/Utilities/codegenNativeComponent.d.ts
++++ b/Libraries/Utilities/codegenNativeComponent.d.ts
+@@ -23,6 +23,6 @@ type NativeComponentType<T> = HostComponent<T>;
+ declare function codegenNativeComponent<Props extends object>(
+   componentName: string,
+   options?: Options,
+-): NativeComponentType<Props>;
++): HostComponent<Props>;
+ 
+ export default codegenNativeComponent;
+diff --git a/Libraries/Utilities/codegenNativeComponent.js b/Libraries/Utilities/codegenNativeComponent.js
+index cb5ece90df681e488c1cd1bf9fb6024c440463ae..89bccf00f6304f5e542d778800fdbd7ccea60cb7 100644
+--- a/Libraries/Utilities/codegenNativeComponent.js
++++ b/Libraries/Utilities/codegenNativeComponent.js
+@@ -34,7 +34,7 @@ export type NativeComponentType<T extends {...}> = HostComponent<T>;
+ function codegenNativeComponent<Props extends {...}>(
+   componentName: string,
+   options?: NativeComponentOptions,
+-): NativeComponentType<Props> {
++): HostComponent<Props> {
+   if (global.RN$Bridgeless === true && __DEV__) {
+     console.warn(
+       `Codegen didn't run for ${componentName}. This will be an error in the future. Make sure you are using @react-native/babel-preset when building your JavaScript code.`,
+diff --git a/types_generated/Libraries/Utilities/codegenNativeComponent.d.ts b/types_generated/Libraries/Utilities/codegenNativeComponent.d.ts
+index 5df6bcab7e90cba8969a3e7bf2f1dcc8a1d0323c..2d8b7d9bc2e303320afd08b5f971a56f4b477bd0 100644
+--- a/types_generated/Libraries/Utilities/codegenNativeComponent.d.ts
++++ b/types_generated/Libraries/Utilities/codegenNativeComponent.d.ts
+@@ -18,7 +18,7 @@ type NativeComponentOptions = Readonly<{
+   excludedPlatforms?: ReadonlyArray<"iOS" | "android"> | undefined;
+ }>;
+ export type NativeComponentType<T extends {}> = HostComponent<T>;
+-declare function codegenNativeComponent<Props extends {}>(componentName: string, options?: NativeComponentOptions): NativeComponentType<Props>;
++declare function codegenNativeComponent<Props extends {}>(componentName: string, options?: NativeComponentOptions): HostComponent<Props>;
+ declare const $$codegenNativeComponent: typeof codegenNativeComponent;
+ declare type $$codegenNativeComponent = typeof $$codegenNativeComponent;
+ export default $$codegenNativeComponent;

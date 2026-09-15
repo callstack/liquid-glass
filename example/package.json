@@ -11,7 +11,7 @@
     "@react-native-community/slider": "^5.0.1",
     "@react-native/new-app-screen": "0.87.1",
     "react": "19.2.3",
-    "react-native": "0.87.1",
+    "react-native": "patch:react-native@npm%3A0.87.1#~/.yarn/patches/react-native-npm-0.87.1-f618c82e97.patch",
     "react-native-safe-area-context": "^5.5.2"
   },
   "devDependencies": {
