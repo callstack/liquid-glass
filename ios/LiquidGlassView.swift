@@ -34,6 +34,10 @@ import UIKit
 
   private var hasConfiguredEffect: Bool = false
   private var hasLaidOutInCurrentWindow: Bool = false
+  private var visibilityLink: CADisplayLink?
+
+  // Composited alpha at or below which UIKit will not build the glass effect.
+  private static let minimumRenderableAlpha: CGFloat = 0.02
 
   @objc public var effectTintColor: UIColor?
   @objc public var interactive: Bool = false
@@ -104,9 +108,20 @@ import UIKit
     }
 
     guard let preferredStyle = style.converted else {
+      stopWaitingForVisibility()
       applyEffect(nil)
       return
     }
+
+    // UIKit silently skips a glass effect created while the view is effectively
+    // transparent, and never retries it, so a view that fades in from 0 would
+    // keep rendering as a plain view. Wait until it is actually visible.
+    guard isEffectRenderable else {
+      waitForVisibility()
+      return
+    }
+
+    stopWaitingForVisibility()
 
     let glassEffect = UIGlassEffect(style: preferredStyle)
 
@@ -154,15 +169,82 @@ import UIKit
   }
 
   private func teardownEffect() {
+    stopWaitingForVisibility()
     setEffectWithoutAnimation(nil)
     hasConfiguredEffect = false
     hasLaidOutInCurrentWindow = false
+  }
+
+  // The effect is rendered against the composited result of the whole superview
+  // chain, so an opaque view inside a parent that is fading in is skipped too.
+  private var isEffectRenderable: Bool {
+    var opacity: CGFloat = 1
+    var view: UIView? = self
+
+    while let current = view {
+      if current.isHidden {
+        return false
+      }
+
+      opacity *= current.alpha
+      view = current.superview
+    }
+
+    return opacity > Self.minimumRenderableAlpha
+  }
+
+  private func waitForVisibility() {
+    guard visibilityLink == nil else {
+      return
+    }
+
+    let link = CADisplayLink(
+      target: WeakDisplayLinkProxy(self),
+      selector: #selector(WeakDisplayLinkProxy.tick)
+    )
+
+    // A view that never becomes visible keeps this link alive, so do not ask for
+    // the display's full rate: 30Hz is imperceptible within a fade and a quarter
+    // of the wake-ups on a 120Hz screen.
+    link.preferredFrameRateRange = CAFrameRateRange(minimum: 15, maximum: 60, preferred: 30)
+    link.add(to: .main, forMode: .common)
+    visibilityLink = link
+  }
+
+  fileprivate func onVisibilityTick() {
+    guard isEffectRenderable else {
+      return
+    }
+
+    setupView()
+  }
+
+  private func stopWaitingForVisibility() {
+    visibilityLink?.invalidate()
+    visibilityLink = nil
+  }
+
+  deinit {
+    visibilityLink?.invalidate()
   }
 
   private func setEffectWithoutAnimation(_ effect: UIVisualEffect?) {
     UIView.performWithoutAnimation {
       self.effect = effect
     }
+  }
+}
+
+// CADisplayLink retains its target, which would keep the view alive forever.
+private final class WeakDisplayLinkProxy: NSObject {
+  private weak var view: LiquidGlassViewImpl?
+
+  init(_ view: LiquidGlassViewImpl) {
+    self.view = view
+  }
+
+  @objc func tick() {
+    view?.onVisibilityTick()
   }
 }
 
