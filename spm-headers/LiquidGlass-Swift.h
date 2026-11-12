@@ -2,7 +2,7 @@
 
 #import <UIKit/UIKit.h>
 
-// Mirrored Swift API. Keep in sync with spm-support/SwiftHeaderPin.swift.
+// This header mirrors the @objc API of ios/LiquidGlassView.swift and ios/LiquidGlassContainerView.swift. If spm-support/SwiftHeaderPin.swift fails to compile, update both files together.
 typedef NS_ENUM(NSInteger, LiquidGlassEffect) {
   LiquidGlassEffectRegular = 0,
   LiquidGlassEffectClear = 1,
