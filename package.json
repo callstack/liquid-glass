@@ -23,7 +23,10 @@
     "!**/__tests__",
     "!**/__fixtures__",
     "!**/__mocks__",
-    "!**/.*"
+    "!**/.*",
+    "Package.swift",
+    "spm-headers",
+    "spm-support"
   ],
   "scripts": {
     "example": "yarn workspace @callstack/liquid-glass-example",
@@ -155,5 +158,8 @@
       "release-it"
     ],
     "version": "0.62.0"
+  },
+  "swiftpmConfig": {
+    "name": "LiquidGlass"
   }
 }
