@@ -64,6 +64,20 @@ using namespace facebook::react;
 - (void)unmountChildComponentView:(UIView<RCTComponentViewProtocol> *)childComponentView index:(NSInteger)index {
   [childComponentView removeFromSuperview];
 }
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+  UIView *hitView = [super hitTest:point withEvent:event];
+
+  // Children are mounted into the effect view's contentView, so a touch that misses them lands on
+  // the effect view instead of this view. Let it through for pointerEvents="box-none", like a View does.
+  if (_props->pointerEvents == PointerEventsMode::BoxNone &&
+      (hitView == _view || hitView == _view.contentView)) {
+    return nil;
+  }
+
+  return hitView;
+}
 #endif
 
 @end
